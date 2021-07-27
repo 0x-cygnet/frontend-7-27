@@ -1,0 +1,22 @@
+sudo: required
+services:
+   - docker
+
+before_install:
+   - docker build -t mybr0d0cker/docker -f Dockerfile.dev .
+
+script:
+   - docker run -e CI=true mybr0d0cker/docker npm run test
+ 
+ 
+deploy:
+   provider: elasticbeanstalk
+   region: "ap-southeast-1"
+   app: "docker"
+   env: "Docker-env"
+   bucket_name: "elasticbeanstalk-ap-southeast-1-001380156346"
+   bucket_path: "docker"
+   on:
+      branch: master
+   access_key_id: $AWS_ACCESS_KEY
+   secret_access_key: $AWS_SECRET_KEY
