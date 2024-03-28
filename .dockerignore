@@ -1,3 +1,2 @@
-package-lock.json
+# ignore the nodes_module folder. it contains dependencies we done need to copy
 node_modules
-yarn.lock
